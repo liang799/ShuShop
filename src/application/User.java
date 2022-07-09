@@ -1,20 +1,26 @@
 package application;
 
-public class User {
-	private String userName, passwd;
-	private boolean important; //big wheel?
+public abstract class User {
+	protected String userName, password;
 
-	private User(String uid, String password, boolean importance) {
+	protected User(String uid, String passwd) {
 		userName = uid;
-		passwd = password;
-		important = importance;
-	}
-	
-	public boolean getImportance() {
-		return important;
+		password = passwd;
 	}
 
-	public static boolean checkImportance(User user) {
-		return user.getImportance();
+	public String getName() {
+		return userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public boolean authenticate(User user, String uid, String passwd) {
+		boolean auth = false;
+		if (user.getName() == uid && user.getPassword() == passwd) {
+			auth = true;
+		}
+		return auth;
 	}
 }
