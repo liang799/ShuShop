@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane minHeight="493.0" minWidth="679.0" prefHeight="551.0" prefWidth="689.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+   <children>
+      <Text layoutX="43.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment">
+         <font>
+            <Font name="System Bold" size="38.0" />
+         </font>
+      </Text>
+      <Text layoutX="47.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You peronsal data is never stored on our server. We use Stipe, an industry giant in payment infrastutre to handle your payments. PS, google Stripe testing cards" wrappingWidth="567.164306640625">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField layoutX="47.0" layoutY="263.0" prefHeight="31.0" prefWidth="252.0" />
+      <Text layoutX="47.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card number">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Button layoutX="47.0" layoutY="469.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Pay" />
+      <Text layoutX="48.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CVC">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <TextField layoutX="48.0" layoutY="401.0" prefHeight="31.0" prefWidth="113.0" />
+      <DatePicker layoutX="47.0" layoutY="333.0" prefHeight="31.0" prefWidth="252.0" />
+      <Text layoutX="48.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiry">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
