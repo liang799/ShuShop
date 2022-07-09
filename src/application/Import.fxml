@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+   <children>
+      <Text layoutX="70.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Import Textbook Database ">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Text>
+      <Text layoutX="70.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File location" />
+      <TextField layoutX="70.0" layoutY="139.0" prefHeight="25.0" prefWidth="373.0" text="C:/Users/User/eclipse-workspace/ShuShop/books.csv" />
+      <TableView layoutX="70.0" layoutY="189.0" prefHeight="270.0" prefWidth="533.0">
+        <columns>
+          <TableColumn prefWidth="335.33324432373047" text="Textbook Code" />
+          <TableColumn minWidth="0.0" prefWidth="196.666748046875" text="Price" />
+        </columns>
+      </TableView>
+      <Button layoutX="456.0" layoutY="139.0" mnemonicParsing="false" text="Update" />
+   </children>
+</AnchorPane>
