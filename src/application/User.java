@@ -1,15 +1,20 @@
 package application;
 
 public class User {
-	private String uid, gid, passwd;
+	private String userName, passwd;
+	private boolean important; //big wheel?
 
-	private User(String name, String password) {
-		uid = name;
+	private User(String uid, String password, boolean importance) {
+		userName = uid;
 		passwd = password;
+		important = importance;
 	}
 	
-	public void groupAdd(String group) {
-		gid = group;
+	public boolean getImportance() {
+		return important;
 	}
 
+	public static boolean checkImportance(User user) {
+		return user.getImportance();
+	}
 }
