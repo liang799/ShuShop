@@ -1,26 +1,23 @@
 package application;
 
 public abstract class User {
-	protected String userName, password;
+	private String userName, hashedPasswd;
+	private String salt = "nicesalt";
 
 	protected User(String uid, String passwd) {
 		userName = uid;
-		password = passwd;
+		hashedPasswd = HashGen.hashPassword(salt + passwd);
 	}
 
 	public String getName() {
 		return userName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getHashedPassword() {
+		return hashedPasswd;
 	}
-
-	public boolean authenticate(User user, String uid, String passwd) {
-		boolean auth = false;
-		if (user.getName() == uid && user.getPassword() == passwd) {
-			auth = true;
-		}
-		return auth;
+	
+	public String getSalt() {
+		return salt;
 	}
 }
