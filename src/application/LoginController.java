@@ -27,11 +27,25 @@ public class LoginController {
 		ArrayList<Customer> customers = AccountVault.getInstance().getCustomers();
 		for (int i = 0; i < customers.size(); i++) {
 			if (authenticate(customers.get(i), txtLogin.getText(), txtPwd.getText())) {
-				AuthManager.getInstance().login(i, "customer");
+				AuthManager.getInstance().login(i, "student");
 				JOptionPane.showMessageDialog(null, "Login successful.");
 				gotoShopping();
+				break;
 			}
 		}
+
+		ArrayList<SuperUser> superUsers = AccountVault.getInstance().getSuperUsers();
+		for (int i = 0; i < superUsers.size(); i++) {
+			if (authenticate(superUsers.get(i), txtLogin.getText(), txtPwd.getText())) {
+				AuthManager.getInstance().login(i, "admin");
+				JOptionPane.showMessageDialog(null, "Login successful.");
+				gotoShopping();
+				break;
+			}
+		}
+
+		if (AuthManager.getInstance().getAuthStatus() == false)
+			JOptionPane.showMessageDialog(null, "Login failed. Please try again.");
 	}
 
 	public boolean authenticate(User user, String uid, String passwd) {
