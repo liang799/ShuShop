@@ -1,20 +1,16 @@
 package application;
 
-import java.util.Random;
-
 public class Card {
 	private String number, cv, date;
 	private double balance;
-	private Random balanceGen;
 	
-	Card(String num, String val, String d) {
+	Card(String num, String val, String d, double b) {
 		number = num;
 		cv = val;
 		date = d;
-		balanceGen = new Random();
-		balance = Double.valueOf(balanceGen.nextInt(50));
+		balance = b;
 	}
-	
+
 	public double getBalance() {
 		return balance;
 	}

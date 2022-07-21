@@ -7,8 +7,8 @@ public class Customer extends User {
 		super(uid, passwd);
 	}
 
-	public void setupCard(String cardNum, String date, String cv) {
-		card = new Card(cardNum, date, cv);
+	public void setCard(Card card) {
+		this.card = card;
 	}
 	
 	public Card getCard() {
