@@ -10,13 +10,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BookController">
    <children>
       <TextField fx:id="searchBar" layoutX="24.0" layoutY="24.0" prefHeight="35.0" prefWidth="475.0" />
-      <TableView layoutX="24.0" layoutY="76.0" prefHeight="309.0" prefWidth="266.0">
+      <TableView fx:id="resultTable" layoutX="24.0" layoutY="76.0" prefHeight="309.0" prefWidth="266.0">
         <columns>
-          <TableColumn prefWidth="125.60001182556152" text="Textbook Code" />
-          <TableColumn prefWidth="139.5999755859375" text="Price" />
+          <TableColumn fx:id="bookResult" prefWidth="125.60001182556152" text="Textbook Code" />
+          <TableColumn fx:id="priceResult" prefWidth="139.5999755859375" text="Price" />
         </columns>
       </TableView>
       <Button layoutX="509.0" layoutY="24.0" mnemonicParsing="false" onAction="#search" prefHeight="35.0" prefWidth="68.0" text="Search" />

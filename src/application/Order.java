@@ -21,6 +21,7 @@ public class Order {
 		return totalPrice;
 	}
 	
-	
-
+	public ArrayList<Book> getOrder() {
+		return orderItems;
+	}
 }

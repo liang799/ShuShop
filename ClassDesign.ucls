@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="application.HashGen" project="ShuShop" 
     file="/ShuShop/src/application/HashGen.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="683" y="75"/>    
+    <position height="-1" width="-1" x="721" y="77"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="application.Book" project="ShuShop" file="/ShuShop/src/application/Book.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="446" y="100"/>    
+    <position height="-1" width="-1" x="460" y="106"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -101,57 +101,61 @@
     </display>  
   </enumeration>  
   <association id="12">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="13" name="card">        
-        <position height="0" width="0" x="0" y="0"/>      
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="13" name="orderItems">        
+        <position height="0" width="0" x="14" y="6"/>      
       </attribute>      
-      <multiplicity id="14" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="14" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="14" y="6"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="15">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="16" name="orderItems">        
+      <attribute id="16" name="customer">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="2147483647">        
+      <multiplicity id="17" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <generalization id="18">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="8"/>  
   </generalization>  
-  <association id="19">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="20" name="customer">        
+  <generalization id="19">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="20">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="21" name="customers">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="21" minimum="0" maximum="1">        
+      <multiplicity id="22" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="22">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="23" name="customers"/>      
-      <multiplicity id="24" minimum="0" maximum="2147483647"/>    
+  <association id="23">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="24" name="card">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="25" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="25">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

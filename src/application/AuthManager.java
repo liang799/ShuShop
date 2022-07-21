@@ -4,6 +4,8 @@ public enum AuthManager {
 	INSTANCE;
 
 	private boolean auth = false;
+	private int arrListPos = -1;
+	private String type = "";
 
 	private AuthManager() {
 	}
@@ -12,19 +14,20 @@ public enum AuthManager {
 		return INSTANCE;
 	}
 
-	public void authenticate(User user, String uid, String passwd) {
-		String encoded = HashGen.hashPassword(user.getSalt() + passwd);
-		if (user.getName().equals(uid) && user.getHashedPassword().equals(encoded))
-			auth = true;
-		else
-			auth = false;
+	public void login(int position, String userType) {
+		auth = true;
+		arrListPos = position;
+		type = userType;
 	}
 
 	public void logout() {
 		auth = false;
+		arrListPos = -1;
+		type = "";
 	}
 
 	public boolean getAuthStatus() {
 		return auth;
 	}
+	
 }
