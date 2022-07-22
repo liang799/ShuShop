@@ -16,16 +16,16 @@ public class Tester {
 			customers.add(user);
 		}
 
-		AuthManager session = new AuthManager();
-		for (Customer cust : customers) {
-			session.authenticate(cust, "ned", "456");
-			if (session.getAuthStatus() == true) {
-				gotoShopping(cust);
-				System.out.println("Hit!");
-			} else {
-				System.out.println("Miss!");
-			}
-		}
+//		AuthManager session = new AuthManager();
+//		for (Customer cust : customers) {
+//			session.authenticate(cust, "ned", "456");
+//			if (session.getAuthStatus() == true) {
+//				gotoShopping(cust);
+//				System.out.println("Hit!");
+//			} else {
+//				System.out.println("Miss!");
+//			}
+//		}
 	}
 
 	private static void gotoShopping(Customer c) {
@@ -39,9 +39,9 @@ public class Tester {
 		double balance = Double.valueOf(r.nextInt(50));
 		Card card = new Card("4242 4242 4242 4242", "12/34", "111", balance);
 		c.setCard(card);
-		Order bill = new Order(c, books);
+//		Order bill = new Order(c, books);
 
-		PaymentManager.payWith(c.getCard(), bill.getTotalPrice());
+//		PaymentManager.payWith(c.getCard(), bill.getTotalPrice());
 		System.out.println(c.getCard().getBalance());
 
 	}
