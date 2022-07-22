@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -10,14 +11,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 public class BookController implements Initializable {
 
 	@FXML
 	private TableView<Book> resultTable;
+
+	@FXML
+	private TextField quanText;
+
+	@FXML
+	private Text bookName;
 
 	@FXML
 	private TableColumn<Book, String> bookResult;
@@ -27,8 +37,11 @@ public class BookController implements Initializable {
 
 	@FXML
 	private TextField searchBar;
-	
+
 	FilteredList<Book> flBook;
+	Book selectedBk;
+	HashMap<Book, Integer> hm;
+	ShoppingCart shopCart = new ShoppingCart();
 
 	@FXML
 	void search(ActionEvent event) {
@@ -36,8 +49,33 @@ public class BookController implements Initializable {
 		flBook.setPredicate(p -> p.getModuleCode().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
 	}
 
+	@FXML
+	void addToCart(ActionEvent event) {
+		int quantity = Integer.parseInt(quanText.getText());
+		hm.put(selectedBk, quantity);
+		shopCart.setCart(hm);
+	}
+
+	@FXML
+	void removeSelected(ActionEvent event) {
+		hm.remove(selectedBk);
+		shopCart.setCart(hm);
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		resultTable.setRowFactory(tv -> {
+			TableRow<Book> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					selectedBk = row.getItem();
+					System.out.println("Double click on: " + selectedBk.getModuleCode());
+					bookName.setText(selectedBk.getModuleCode());
+				}
+			});
+			return row;
+		});
+
 		bookResult.setCellValueFactory(new PropertyValueFactory<Book, String>("moduleCode"));
 		priceResult.setCellValueFactory(new PropertyValueFactory<Book, Double>("price"));
 
