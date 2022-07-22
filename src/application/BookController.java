@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,10 +27,13 @@ public class BookController implements Initializable {
 
 	@FXML
 	private TextField searchBar;
+	
+	FilteredList<Book> flBook;
 
 	@FXML
 	void search(ActionEvent event) {
-
+		// https://stackoverflow.com/questions/47559491/making-a-search-bar-in-javafx
+		flBook.setPredicate(p -> p.getModuleCode().toLowerCase().contains(searchBar.getText().toLowerCase().trim()));
 	}
 
 	@Override
@@ -37,14 +41,12 @@ public class BookController implements Initializable {
 		bookResult.setCellValueFactory(new PropertyValueFactory<Book, String>("moduleCode"));
 		priceResult.setCellValueFactory(new PropertyValueFactory<Book, Double>("price"));
 
-		resultTable.setItems(getBooks());
-
+		flBook = new FilteredList<Book>(getBooks(), p -> true);// Pass the data to a filtered list
+		resultTable.setItems(flBook);// Set the table's items using the filtered list
 	}
 
 	public ObservableList<Book> getBooks() {
-		ObservableList<Book> list = FXCollections.observableArrayList();
-		list.add(new Book("ET0730", 4.2));
-		list.add(new Book("MS0730", 3.2));
+		ObservableList<Book> list = FXCollections.observableArrayList(CsvFile.getInstance().getData());
 		return list;
 	}
 
