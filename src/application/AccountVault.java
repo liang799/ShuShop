@@ -12,17 +12,8 @@ public enum AccountVault {
 		return INSTANCE;
 	}
 
-//	private SuperUser admin;
 	private ArrayList<Customer> customers;
 	private ArrayList<SuperUser> superUsers;
-
-//	public void setAdmin(SuperUser admin) {
-//		this.admin = admin;
-//	}
-//
-//	public SuperUser getAdmin() {
-//		return admin;
-//	}
 
 	public void setCustomers(ArrayList<Customer> c) {
 		customers = c;

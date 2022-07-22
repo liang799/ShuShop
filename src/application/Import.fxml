@@ -8,8 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ImportController">
    <children>
       <Text layoutX="70.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Import Textbook Database ">
          <font>
@@ -17,13 +16,13 @@
          </font>
       </Text>
       <Text layoutX="70.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File location" />
-      <TextField layoutX="70.0" layoutY="139.0" prefHeight="25.0" prefWidth="373.0" text="C:/Users/User/eclipse-workspace/ShuShop/books.csv" />
-      <TableView layoutX="70.0" layoutY="189.0" prefHeight="270.0" prefWidth="533.0">
+      <TextField fx:id="locationTextView" layoutX="70.0" layoutY="139.0" prefHeight="25.0" prefWidth="373.0" />
+      <TableView fx:id="csvTable" layoutX="70.0" layoutY="189.0" prefHeight="270.0" prefWidth="533.0">
         <columns>
-          <TableColumn prefWidth="335.33324432373047" text="Textbook Code" />
-          <TableColumn minWidth="0.0" prefWidth="196.666748046875" text="Price" />
+          <TableColumn fx:id="csvTextbookCol" prefWidth="335.33324432373047" text="Textbook Code" />
+          <TableColumn fx:id="csvPriceCol" minWidth="0.0" prefWidth="196.666748046875" text="Price" />
         </columns>
       </TableView>
-      <Button layoutX="456.0" layoutY="139.0" mnemonicParsing="false" text="Update" />
+      <Button layoutX="456.0" layoutY="139.0" mnemonicParsing="false" onAction="#onUpdateButtonClicked" text="Update" />
    </children>
 </AnchorPane>
