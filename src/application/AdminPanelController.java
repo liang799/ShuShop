@@ -18,30 +18,25 @@ public class AdminPanelController {
 
 	@FXML
 	void onImportClicked(ActionEvent event) {
-		try {
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Import.fxml"));
-			Scene scene2 = new Scene(root);
-			Stage Window2 = new Stage();
-			Window2.initModality(Modality.APPLICATION_MODAL);
-			Window2.setScene(scene2);
-			Window2.show();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+		gotoLocation(event, "Import.fxml");
 	}
 
 	@FXML
 	void onLogoutClicked(ActionEvent event) {
-		// get a handle to the stage
 		Stage stage = (Stage) logoutButton.getScene().getWindow();
-		// do what you have to do
 		stage.close();
+		AuthManager.getInstance().logout();
+		gotoLocation(event, "Login.fxml");
 	}
 
 	@FXML
 	void onOrderClicked(ActionEvent event) {
+		gotoLocation(event, "Orders.fxml");
+	}
+
+	public void gotoLocation(ActionEvent event, String location) {
 		try {
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Orders.fxml"));
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource(location));
 			Scene scene2 = new Scene(root);
 			Stage Window2 = new Stage();
 			Window2.initModality(Modality.APPLICATION_MODAL);
@@ -51,5 +46,4 @@ public class AdminPanelController {
 			System.out.println(e.getMessage());
 		}
 	}
-
 }

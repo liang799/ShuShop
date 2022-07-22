@@ -34,9 +34,10 @@ public class Main extends Application {
 		// Read Customers
 		ArrayList<Customer> customer = new ArrayList<Customer>();
 		Map<String, String> users = readUsers("students.txt");
+		Customer c;
 		for (Map.Entry<String, String> set : users.entrySet()) {
 			System.out.println(set.getKey() + " = " + set.getValue());
-			Customer c = new Customer(set.getKey(), set.getValue());
+			c = new Customer(set.getKey(), set.getValue());
 			customer.add(c);
 		}
 		if (!customer.isEmpty())
@@ -45,9 +46,10 @@ public class Main extends Application {
 		// Read SuperUsers
 		ArrayList<SuperUser> superUsers = new ArrayList<SuperUser>();
 		users = readUsers("admin.txt");
+		SuperUser s;
 		for (Map.Entry<String, String> set : users.entrySet()) {
 			System.out.println(set.getKey() + " = " + set.getValue());
-			SuperUser s = new SuperUser(set.getKey(), set.getValue());
+			s = new SuperUser(set.getKey(), set.getValue());
 			superUsers.add(s);
 		}
 		if (!superUsers.isEmpty())

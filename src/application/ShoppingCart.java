@@ -1,16 +1,12 @@
 package application;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class ShoppingCart {
-	private HashMap<Book, Integer> cart;
+	private ArrayList<CartItem> ce;
 	
-	public void setCart(HashMap<Book, Integer> c) {
-		cart = c;
-	}
-	
-	public HashMap<Book, Integer> getCart() {
-		return cart;
+	public void updateCart(ArrayList<CartItem> ce) {
+		this.ce = ce;
 	}
 
 }

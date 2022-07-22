@@ -2,21 +2,28 @@ package application;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 public class BookController implements Initializable {
 
@@ -36,11 +43,23 @@ public class BookController implements Initializable {
 	private TableColumn<Book, Double> priceResult;
 
 	@FXML
+	private TableView<Map.Entry<Book, Integer>> cartTable;
+
+	@FXML
+	private TableColumn<Map.Entry<Book, Integer>, String> codeCol = new TableColumn<>("Key");
+
+	@FXML
+	private TableColumn<Map.Entry<Book, Integer>, Double> priceCol = new TableColumn<>("Key");
+
+	@FXML
+	private TableColumn<Map.Entry<Book, Integer>, Integer> qtyCol = new TableColumn<>("Value");
+
+	@FXML
 	private TextField searchBar;
 
 	FilteredList<Book> flBook;
 	Book selectedBk;
-	HashMap<Book, Integer> hm;
+	Map<Book, Integer> hm = new HashMap<>();
 	ShoppingCart shopCart = new ShoppingCart();
 
 	@FXML
@@ -52,8 +71,10 @@ public class BookController implements Initializable {
 	@FXML
 	void addToCart(ActionEvent event) {
 		int quantity = Integer.parseInt(quanText.getText());
+		System.out.println(quanText.getText());
 		hm.put(selectedBk, quantity);
-		shopCart.setCart(hm);
+		ObservableList<Map.Entry<Book, Integer>> items = FXCollections.observableArrayList(hm.entrySet());
+		cartTable.setItems(items);
 	}
 
 	@FXML
@@ -81,6 +102,41 @@ public class BookController implements Initializable {
 
 		flBook = new FilteredList<Book>(getBooks(), p -> true);// Pass the data to a filtered list
 		resultTable.setItems(flBook);// Set the table's items using the filtered list
+
+		priceCol.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, Double>, ObservableValue<Double>>() {
+					@Override
+					public ObservableValue<Double> call(
+							TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, Double> p) {
+						// this callback returns property for just one cell, you can't use a loop here
+						// for first column we use key
+						return new SimpleDoubleProperty(p.getValue().getKey().getPrice()).asObject();
+					}
+				});
+		qtyCol.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, Integer>, ObservableValue<Integer>>() {
+					@Override
+					public ObservableValue<Integer> call(
+							TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, Integer> p) {
+						// this callback returns property for just one cell, you can't use a loop here
+						// for first column we use key
+						return new SimpleIntegerProperty(p.getValue().getValue()).asObject();
+					}
+				});
+
+		codeCol.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(
+							TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, String> p) {
+						// this callback returns property for just one cell, you can't use a loop here
+						// for first column we use key
+						return new SimpleStringProperty(p.getValue().getKey().getModuleCode());
+					}
+				});
+		cartTable = new TableView<Map.Entry<Book, Integer>>();
+		ObservableList<Map.Entry<Book, Integer>> items = FXCollections.observableArrayList(hm.entrySet());
+		cartTable.setItems(items);
 	}
 
 	public ObservableList<Book> getBooks() {

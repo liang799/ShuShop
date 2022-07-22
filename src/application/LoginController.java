@@ -1,11 +1,13 @@
 package application;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,7 +36,7 @@ public class LoginController {
 			if (authenticate(customers.get(i), txtLogin.getText(), txtPwd.getText())) {
 				AuthManager.getInstance().login(i, "student");
 				JOptionPane.showMessageDialog(null, "Login successful.");
-				gotoShopping();
+				gotoLocation(event, "Books.fxml");
 				break;
 			}
 		}
@@ -44,7 +46,7 @@ public class LoginController {
 			if (authenticate(superUsers.get(i), txtLogin.getText(), txtPwd.getText())) {
 				AuthManager.getInstance().login(i, "admin");
 				JOptionPane.showMessageDialog(null, "Login successful.");
-				gotoAdminPanel();
+				gotoLocation(event, "AdminPanel.fxml");
 				break;
 			}
 		}
@@ -62,29 +64,18 @@ public class LoginController {
 		return auth;
 	}
 
-	public void gotoShopping() {
+	public void gotoLocation(ActionEvent event, String location) {
 		try {
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Books.fxml"));
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource(location));
 			Scene scene2 = new Scene(root);
 			Stage Window2 = new Stage();
 			Window2.initModality(Modality.APPLICATION_MODAL);
 			Window2.setScene(scene2);
-			Window2.showAndWait();
+			Window2.show();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-	}
-
-	public void gotoAdminPanel() {
-		try {
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("AdminPanel.fxml"));
-			Scene scene2 = new Scene(root);
-			Stage Window2 = new Stage();
-			Window2.initModality(Modality.APPLICATION_MODAL);
-			Window2.setScene(scene2);
-			Window2.showAndWait();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+		Stage login = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		login.close();
 	}
 }
