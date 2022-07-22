@@ -26,15 +26,20 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="13.0" layoutY="171.0" mnemonicParsing="false" onAction="#addToCart" style="-fx-background-color: #8ab4f8;" text="Add to Cart" />
+                        <Text fill="#e7e2e2" layoutX="144.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+                           <font>
+                              <Font name="Bookman Old Style Italic" size="96.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="13.0" layoutY="191.0" mnemonicParsing="false" onAction="#addToCart" style="-fx-background-color: #8ab4f8;" text="Add to Cart" />
                         <Text fx:id="bookName" layoutX="14.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double Click Row">
                            <font>
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="quanText" layoutX="14.0" layoutY="98.0" prefHeight="25.0" prefWidth="76.0" text="1" />
-                        <Text layoutX="14.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quanity" />
-                        <Button layoutX="100.0" layoutY="171.0" mnemonicParsing="false" onAction="#removeSelected" style="-fx-background-color: none;" text="Remove" />
+                        <TextField fx:id="quanText" layoutX="14.0" layoutY="133.0" prefHeight="25.0" prefWidth="76.0" text="1" />
+                        <Text layoutX="14.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quanity" />
+                        <Text layoutX="14.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Made in Singapore. Freshly printed by SP." />
                      </children>
                   </AnchorPane>
             </content>
@@ -45,11 +50,11 @@
                      <children>
                         <Button layoutX="21.0" layoutY="220.0" mnemonicParsing="false" style="-fx-background-color: #8ab4f8;" text="Checkout" />
                         <Button layoutX="92.0" layoutY="220.0" mnemonicParsing="false" style="-fx-background-color: none;" text="Remove Selected" />
-                        <TableView layoutX="21.0" layoutY="14.0" prefHeight="193.0" prefWidth="237.0">
+                        <TableView fx:id="cartTable" layoutX="21.0" layoutY="14.0" prefHeight="193.0" prefWidth="237.0">
                           <columns>
-                              <TableColumn prefWidth="46.400028228759766" text="Qty" />
-                            <TableColumn prefWidth="119.20001220703125" text="Textbook Code" />
-                            <TableColumn prefWidth="71.19996643066406" text="Price" />
+                              <TableColumn fx:id="qtyCol" prefWidth="46.400028228759766" text="Qty" />
+                            <TableColumn fx:id="codeCol" prefWidth="119.20001220703125" text="Textbook Code" />
+                            <TableColumn fx:id="priceCol" prefWidth="71.19996643066406" text="Price" />
                           </columns>
                         </TableView>
                      </children>

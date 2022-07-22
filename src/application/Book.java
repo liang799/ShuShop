@@ -27,4 +27,9 @@ public class Book {
 	public SimpleDoubleProperty getWrappedPrice() {
 		return price;
 	}
+	
+	@Override
+	public String toString() {
+		return moduleCode + " $" + price;
+	}
 }

@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -43,24 +44,23 @@ public class BookController implements Initializable {
 	private TableColumn<Book, Double> priceResult;
 
 	@FXML
-	private TableView<Map.Entry<Book, Integer>> cartTable;
-
-	@FXML
-	private TableColumn<Map.Entry<Book, Integer>, String> codeCol = new TableColumn<>("Key");
-
-	@FXML
-	private TableColumn<Map.Entry<Book, Integer>, Double> priceCol = new TableColumn<>("Key");
-
-	@FXML
-	private TableColumn<Map.Entry<Book, Integer>, Integer> qtyCol = new TableColumn<>("Value");
-
-	@FXML
 	private TextField searchBar;
+
+	@FXML
+	private TableView<CartItem> cartTable;
+
+	@FXML
+	private TableColumn<CartItem, String> codeCol;
+
+	@FXML
+	private TableColumn<CartItem, Double> priceCol;
+
+	@FXML
+	private TableColumn<CartItem, Integer> qtyCol;
 
 	FilteredList<Book> flBook;
 	Book selectedBk;
-	Map<Book, Integer> hm = new HashMap<>();
-	ShoppingCart shopCart = new ShoppingCart();
+	ArrayList<CartItem> shopCart = new ArrayList<>();
 
 	@FXML
 	void search(ActionEvent event) {
@@ -72,19 +72,15 @@ public class BookController implements Initializable {
 	void addToCart(ActionEvent event) {
 		int quantity = Integer.parseInt(quanText.getText());
 		System.out.println(quanText.getText());
-		hm.put(selectedBk, quantity);
-		ObservableList<Map.Entry<Book, Integer>> items = FXCollections.observableArrayList(hm.entrySet());
+		CartItem ci = new CartItem(selectedBk, quantity);
+		shopCart.add(ci);
+		ObservableList<CartItem> items = FXCollections.observableArrayList(shopCart);
 		cartTable.setItems(items);
-	}
-
-	@FXML
-	void removeSelected(ActionEvent event) {
-		hm.remove(selectedBk);
-		shopCart.setCart(hm);
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		// Search Results Table
 		resultTable.setRowFactory(tv -> {
 			TableRow<Book> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
@@ -103,39 +99,11 @@ public class BookController implements Initializable {
 		flBook = new FilteredList<Book>(getBooks(), p -> true);// Pass the data to a filtered list
 		resultTable.setItems(flBook);// Set the table's items using the filtered list
 
-		priceCol.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, Double>, ObservableValue<Double>>() {
-					@Override
-					public ObservableValue<Double> call(
-							TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, Double> p) {
-						// this callback returns property for just one cell, you can't use a loop here
-						// for first column we use key
-						return new SimpleDoubleProperty(p.getValue().getKey().getPrice()).asObject();
-					}
-				});
-		qtyCol.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, Integer>, ObservableValue<Integer>>() {
-					@Override
-					public ObservableValue<Integer> call(
-							TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, Integer> p) {
-						// this callback returns property for just one cell, you can't use a loop here
-						// for first column we use key
-						return new SimpleIntegerProperty(p.getValue().getValue()).asObject();
-					}
-				});
-
-		codeCol.setCellValueFactory(
-				new Callback<TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, String>, ObservableValue<String>>() {
-					@Override
-					public ObservableValue<String> call(
-							TableColumn.CellDataFeatures<Map.Entry<Book, Integer>, String> p) {
-						// this callback returns property for just one cell, you can't use a loop here
-						// for first column we use key
-						return new SimpleStringProperty(p.getValue().getKey().getModuleCode());
-					}
-				});
-		cartTable = new TableView<Map.Entry<Book, Integer>>();
-		ObservableList<Map.Entry<Book, Integer>> items = FXCollections.observableArrayList(hm.entrySet());
+		// Shopping Cart Table
+		codeCol.setCellValueFactory(new PropertyValueFactory<CartItem, String>("moduleCode"));
+		qtyCol.setCellValueFactory(new PropertyValueFactory<CartItem, Integer>("quantity"));
+		priceCol.setCellValueFactory(new PropertyValueFactory<CartItem, Double>("price"));
+		ObservableList<CartItem> items = FXCollections.observableArrayList(shopCart);
 		cartTable.setItems(items);
 	}
 
