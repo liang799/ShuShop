@@ -7,8 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane minHeight="700.0" minWidth="700.0" prefHeight="702.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="700.0" minWidth="700.0" prefHeight="702.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminPanelController">
    <children>
       <Text layoutX="262.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel">
          <font>
@@ -17,7 +16,7 @@
       </Text>
       <VBox layoutX="286.0" layoutY="285.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onBookVenueClicked" prefHeight="63.0" prefWidth="261.0" text="Import Textbooks">
+            <Button mnemonicParsing="false" onAction="#onImportClicked" prefHeight="63.0" prefWidth="261.0" text="Import Textbooks">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -25,12 +24,12 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onBookVenueClicked" prefHeight="63.0" prefWidth="261.0" text="View Orders">
+            <Button mnemonicParsing="false" onAction="#onOrderClicked" prefHeight="63.0" prefWidth="261.0" text="View Orders">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onBookVenueClicked" prefHeight="63.0" prefWidth="261.0" text="Log Out">
+            <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#onLogoutClicked" prefHeight="63.0" prefWidth="261.0" text="Log Out">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>

@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -16,6 +17,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LoginController {
+
+	@FXML
+	private Button loginButton;
+
 	@FXML
 	private TextField txtLogin;
 
@@ -39,7 +44,7 @@ public class LoginController {
 			if (authenticate(superUsers.get(i), txtLogin.getText(), txtPwd.getText())) {
 				AuthManager.getInstance().login(i, "admin");
 				JOptionPane.showMessageDialog(null, "Login successful.");
-				gotoShopping();
+				gotoAdminPanel();
 				break;
 			}
 		}
@@ -64,10 +69,22 @@ public class LoginController {
 			Stage Window2 = new Stage();
 			Window2.initModality(Modality.APPLICATION_MODAL);
 			Window2.setScene(scene2);
-			Window2.show();
+			Window2.showAndWait();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
+	public void gotoAdminPanel() {
+		try {
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("AdminPanel.fxml"));
+			Scene scene2 = new Scene(root);
+			Stage Window2 = new Stage();
+			Window2.initModality(Modality.APPLICATION_MODAL);
+			Window2.setScene(scene2);
+			Window2.showAndWait();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
