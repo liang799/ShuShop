@@ -5,7 +5,6 @@ public enum AuthManager {
 
 	private boolean auth = false;
 	private int arrListPos = -1;
-	private String type = "";
 
 	private AuthManager() {
 	}
@@ -14,20 +13,22 @@ public enum AuthManager {
 		return INSTANCE;
 	}
 
-	public void login(int position, String userType) {
+	public void login(int position) {
 		auth = true;
 		arrListPos = position;
-		type = userType;
 	}
 
 	public void logout() {
 		auth = false;
 		arrListPos = -1;
-		type = "";
 	}
 
 	public boolean getAuthStatus() {
 		return auth;
+	}
+	
+	public int getArrayListPos() {
+		return arrListPos;
 	}
 	
 }

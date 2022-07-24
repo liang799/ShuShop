@@ -7,20 +7,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OrdersController">
    <children>
       <Text layoutX="31.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders">
          <font>
             <Font name="System Bold" size="35.0" />
          </font>
       </Text>
-      <TableView layoutX="30.0" layoutY="99.0" prefHeight="324.0" prefWidth="629.0">
+      <TableView fx:id="ordersTable" layoutX="30.0" layoutY="99.0" prefHeight="324.0" prefWidth="629.0">
         <columns>
-          <TableColumn prefWidth="194.80002403259277" text="Textbook code" />
-          <TableColumn minWidth="3.5999755859375" prefWidth="278.0" text="Total Price" />
-            <TableColumn prefWidth="155.19998168945312" text="Quantity" />
+          <TableColumn fx:id="codeCol" prefWidth="194.80002403259277" text="Textbook code" />
+          <TableColumn fx:id="priceCol" minWidth="3.5999755859375" prefWidth="278.0" text="Total Price" />
+            <TableColumn fx:id="qtyCol" prefWidth="155.19998168945312" text="Quantity" />
         </columns>
       </TableView>
-      <Button layoutX="30.0" layoutY="444.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="138.0" text="Export as CSV" />
+      <Button layoutX="30.0" layoutY="444.0" mnemonicParsing="false" onAction="#onExport" prefHeight="34.0" prefWidth="138.0" text="Export as CSV" />
    </children>
 </AnchorPane>

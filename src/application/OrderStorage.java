@@ -10,7 +10,7 @@ public enum OrderStorage {
 		orderItems = c;
 	}
 	
-	public OrderStorage getInstance() {
+	public static OrderStorage getInstance() {
 		return INSTANCE;
 	}
 	

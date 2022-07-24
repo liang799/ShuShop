@@ -70,22 +70,30 @@ public class BookController implements Initializable {
 
 	@FXML
 	void addToCart(ActionEvent event) {
-		int quantity = Integer.parseInt(quanText.getText());
-		CartItem cartItem = new CartItem(selectedBk, quantity);
-		shopCart.add(cartItem);
-		ObservableList<CartItem> items = FXCollections.observableArrayList(shopCart);
-		System.out.println("Size of shopping cart array is " + shopCart.size());
-		JOptionPane.showMessageDialog(null, cartItem.getBook().getModuleCode() + " has been added to cart");
-		cartTable.setItems(items);
+		if (selectedBk == null) {
+			JOptionPane.showMessageDialog(null, "To select a textbook, double click on the row in the left table");
+		} else {
+			int quantity = Integer.parseInt(quanText.getText());
+			CartItem cartItem = new CartItem(selectedBk, quantity);
+			shopCart.add(cartItem);
+			ObservableList<CartItem> items = FXCollections.observableArrayList(shopCart);
+			System.out.println("Size of shopping cart array is " + shopCart.size());
+			JOptionPane.showMessageDialog(null, cartItem.getBook().getModuleCode() + " has been added to cart");
+			cartTable.setItems(items);
+		}
 	}
 
 	@FXML
 	void onCheckout(ActionEvent event) {
-		double bill = calculateBill(shopCart);
-		String message = "Total amount payable is $" + String.valueOf(bill) + ". Would you like to checkout?";
-		int reply = JOptionPane.showConfirmDialog(null, message , "Confirmation", JOptionPane.YES_NO_OPTION);
-		if (reply == JOptionPane.YES_OPTION) {
-			gotoPayment(event, bill);
+		if (shopCart.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Shopping Cart is empty");
+		} else {
+			double bill = calculateBill(shopCart);
+			String message = "Total amount payable is $" + String.valueOf(bill) + ". Would you like to checkout?";
+			int reply = JOptionPane.showConfirmDialog(null, message, "Confirmation", JOptionPane.YES_NO_OPTION);
+			if (reply == JOptionPane.YES_OPTION) {
+				gotoPayment(event, bill, shopCart);
+			}
 		}
 	}
 
@@ -133,12 +141,12 @@ public class BookController implements Initializable {
 	public double calculateBill(ArrayList<CartItem> shopCart) {
 		double bill = 0.0;
 		for (CartItem item : shopCart) {
-			bill += item.getBook().getPrice();
+			bill += Double.valueOf(item.getQuantity()) * item.getBook().getPrice();
 		}
 		return bill;
 	}
 
-	public void gotoPayment(ActionEvent event, double bill) {
+	public void gotoPayment(ActionEvent event, double bill, ArrayList<CartItem> c) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Payment.fxml"));
 			AnchorPane root = (AnchorPane) loader.load();
@@ -148,7 +156,7 @@ public class BookController implements Initializable {
 			Window2.setScene(scene2);
 			Window2.show();
 			PaymentController controller = loader.getController();
-			controller.transferData(bill);
+			controller.transferData(bill, c);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}

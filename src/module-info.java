@@ -4,6 +4,7 @@ module ShuShop {
 	requires java.desktop;
 	requires javafx.graphics;
 	requires javafx.base;
+	requires java.base;
 	
 	opens application to javafx.graphics, javafx.fxml, javafx.base;
 }

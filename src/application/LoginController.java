@@ -34,7 +34,7 @@ public class LoginController {
 		ArrayList<Customer> customers = AccountVault.getInstance().getCustomers();
 		for (int i = 0; i < customers.size(); i++) {
 			if (authenticate(customers.get(i), txtLogin.getText(), txtPwd.getText())) {
-				AuthManager.getInstance().login(i, "student");
+				AuthManager.getInstance().login(i);
 				JOptionPane.showMessageDialog(null, "Login successful.");
 				gotoLocation(event, "Books.fxml");
 				break;
@@ -44,7 +44,7 @@ public class LoginController {
 		ArrayList<SuperUser> superUsers = AccountVault.getInstance().getSuperUsers();
 		for (int i = 0; i < superUsers.size(); i++) {
 			if (authenticate(superUsers.get(i), txtLogin.getText(), txtPwd.getText())) {
-				AuthManager.getInstance().login(i, "admin");
+				AuthManager.getInstance().login(i);
 				JOptionPane.showMessageDialog(null, "Login successful.");
 				gotoLocation(event, "AdminPanel.fxml");
 				break;

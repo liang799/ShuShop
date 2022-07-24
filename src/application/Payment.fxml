@@ -19,20 +19,20 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField layoutX="47.0" layoutY="263.0" prefHeight="31.0" prefWidth="252.0" />
+      <TextField fx:id="cardNum" layoutX="47.0" layoutY="263.0" prefHeight="31.0" prefWidth="252.0" />
       <Text layoutX="47.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card number">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Button fx:id="payButton" layoutX="47.0" layoutY="469.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="113.0" text="Pay" />
+      <Button fx:id="payButton" layoutX="47.0" layoutY="469.0" mnemonicParsing="false" onAction="#onPay" prefHeight="31.0" prefWidth="113.0" text="Pay" />
       <Text layoutX="48.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CVC">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField layoutX="48.0" layoutY="401.0" prefHeight="31.0" prefWidth="113.0" />
-      <DatePicker layoutX="47.0" layoutY="333.0" prefHeight="31.0" prefWidth="252.0" />
+      <TextField fx:id="cvc" layoutX="48.0" layoutY="401.0" prefHeight="31.0" prefWidth="113.0" />
+      <DatePicker fx:id="expiryDate" layoutX="47.0" layoutY="333.0" prefHeight="31.0" prefWidth="252.0" />
       <Text layoutX="48.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expiry">
          <font>
             <Font size="15.0" />
