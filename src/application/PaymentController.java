@@ -54,7 +54,7 @@ public class PaymentController implements Initializable {
 				Random r = new Random();
 				double balance = Double.valueOf(r.nextInt(50));
 				System.out.println(String.valueOf(balance));
-				Card card = new Card(cardNum.getText(), expiryDate.getValue().toString(), cvc.getText(), balance);
+				Card card = new Card(cardNum.getText(), cvc.getText(), expiryDate.getValue().toString(), balance);
 				AccountVault.getInstance().getCustomers().get(AuthManager.getInstance().getArrayListPos())
 						.setCard(card);
 			}
@@ -95,7 +95,7 @@ public class PaymentController implements Initializable {
 			cardNum.setText("*****************");
 			String date = AccountVault.getInstance().getCustomers().get(AuthManager.getInstance().getArrayListPos()).getCard().getDate();
 			System.out.println(date);
-//			expiryDate.setValue(LocalDate.parse(date));
+			expiryDate.setValue(LocalDate.parse(date));
 			cvc.setText("***");
 		}
 	}
