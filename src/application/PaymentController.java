@@ -52,7 +52,7 @@ public class PaymentController implements Initializable {
 			if (AccountVault.getInstance().getCustomers().get(AuthManager.getInstance().getArrayListPos())
 					.getCard() == null) {
 				Random r = new Random();
-				double balance = Double.valueOf(r.nextInt(50));
+				double balance = 50.0;
 				System.out.println(String.valueOf(balance));
 				Card card = new Card(cardNum.getText(), cvc.getText(), expiryDate.getValue().toString(), balance);
 				AccountVault.getInstance().getCustomers().get(AuthManager.getInstance().getArrayListPos())
