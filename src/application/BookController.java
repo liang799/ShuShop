@@ -1,21 +1,30 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.scene.Node;
+
+import javax.swing.JOptionPane;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class BookController implements Initializable {
 
@@ -62,11 +71,29 @@ public class BookController implements Initializable {
 	@FXML
 	void addToCart(ActionEvent event) {
 		int quantity = Integer.parseInt(quanText.getText());
-		System.out.println(quanText.getText());
-		CartItem ci = new CartItem(selectedBk, quantity);
-		shopCart.add(ci);
+		CartItem cartItem = new CartItem(selectedBk, quantity);
+		shopCart.add(cartItem);
 		ObservableList<CartItem> items = FXCollections.observableArrayList(shopCart);
+		System.out.println("Size of shopping cart array is " + shopCart.size());
+		JOptionPane.showMessageDialog(null, cartItem.getBook().getModuleCode() + " has been added to cart");
 		cartTable.setItems(items);
+	}
+
+	@FXML
+	void onCheckout(ActionEvent event) {
+		double bill = calculateBill(shopCart);
+		String message = "Total amount payable is $" + String.valueOf(bill) + ". Would you like to checkout?";
+		int reply = JOptionPane.showConfirmDialog(null, message , "Confirmation", JOptionPane.YES_NO_OPTION);
+		if (reply == JOptionPane.YES_OPTION) {
+			gotoPayment(event, bill);
+		}
+	}
+
+	@FXML
+	void onRemoveRow(ActionEvent event) {
+		shopCart.remove(cartTable.getSelectionModel().getSelectedItem());
+		cartTable.getItems().removeAll(cartTable.getSelectionModel().getSelectedItem());
+		System.out.println("Size of shopping cart array is " + shopCart.size());
 	}
 
 	@Override
@@ -101,6 +128,32 @@ public class BookController implements Initializable {
 	public ObservableList<Book> getBooks() {
 		ObservableList<Book> list = FXCollections.observableArrayList(CsvFile.getInstance().getData());
 		return list;
+	}
+
+	public double calculateBill(ArrayList<CartItem> shopCart) {
+		double bill = 0.0;
+		for (CartItem item : shopCart) {
+			bill += item.getBook().getPrice();
+		}
+		return bill;
+	}
+
+	public void gotoPayment(ActionEvent event, double bill) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Payment.fxml"));
+			AnchorPane root = (AnchorPane) loader.load();
+			Scene scene2 = new Scene(root);
+			Stage Window2 = new Stage();
+			Window2.initModality(Modality.APPLICATION_MODAL);
+			Window2.setScene(scene2);
+			Window2.show();
+			PaymentController controller = loader.getController();
+			controller.transferData(bill);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		Stage login = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		login.close();
 	}
 
 }

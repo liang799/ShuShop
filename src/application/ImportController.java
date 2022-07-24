@@ -42,6 +42,7 @@ public class ImportController implements Initializable {
 		locationTextView.setText(CsvFile.getInstance().getPath());
 		csvTextbookCol.setCellValueFactory(new PropertyValueFactory<Book, String>("moduleCode"));
 		csvPriceCol.setCellValueFactory(new PropertyValueFactory<Book, Double>("price"));
+		csvTable.setItems(getBooks());
 	}
 
 	public ObservableList<Book> getBooks() {

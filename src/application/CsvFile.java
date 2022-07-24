@@ -3,7 +3,7 @@ package application;
 import java.util.ArrayList;
 
 public enum CsvFile {
-	INSTANCE("C:/Users/User/eclipse-workspace/ShuShop/books.csv");
+	INSTANCE("C:/Users/User/eclipse-workspace/ShuShop/b.csv");
 
 	String path;
 	ArrayList<Book> csvData = new ArrayList<Book>();
