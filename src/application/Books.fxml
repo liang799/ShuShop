@@ -47,7 +47,7 @@
         </columns>
       </TableView>
       <Button layoutX="697.0" layoutY="24.0" mnemonicParsing="false" onAction="#search" prefHeight="35.0" prefWidth="68.0" text="Search" />
-      <Accordion layoutX="495.0" layoutY="76.0" prefHeight="309.0" prefWidth="275.0">
+      <Accordion fx:id="accordion" layoutX="495.0" layoutY="76.0" prefHeight="309.0" prefWidth="275.0">
         <panes>
           <TitledPane fx:id="selectedAcc" animated="false" text="Selected Item">
             <content>
@@ -90,5 +90,10 @@
           </TitledPane>
         </panes>
       </Accordion>
+      <ImageView fx:id="closedImage" fitHeight="150.0" fitWidth="200.0" layoutX="257.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../img/closed.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -16,12 +16,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -48,6 +50,12 @@ public class BookController implements Initializable {
 
 	@FXML
 	private TableColumn<Book, Double> priceResult;
+
+	@FXML
+	private ImageView closedImage;
+
+	@FXML
+	private Accordion accordion;
 
 	@FXML
 	private TextField searchBar;
@@ -140,6 +148,15 @@ public class BookController implements Initializable {
 		priceResult.setCellValueFactory(new PropertyValueFactory<Book, Double>("price"));
 
 		flBook = new FilteredList<Book>(getBooks(), p -> true);// Pass the data to a filtered list
+		if (flBook.isEmpty()) {
+			accordion.setDisable(true);
+			closedImage.setVisible(true);
+			searchBar.setDisable(true);
+		} else {
+			accordion.setDisable(false);
+			closedImage.setVisible(false);
+			searchBar.setDisable(false);
+		}
 		resultTable.setItems(flBook);// Set the table's items using the filtered list
 
 		// Shopping Cart Table
@@ -155,7 +172,7 @@ public class BookController implements Initializable {
 		if (books == null) {
 			books = new ArrayList<Book>();
 		}
-		ObservableList<Book> list = FXCollections.observableArrayList(books);;
+		ObservableList<Book> list = FXCollections.observableArrayList(books);
 
 		return list;
 	}
