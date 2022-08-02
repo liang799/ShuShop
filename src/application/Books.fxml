@@ -6,21 +6,48 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BookController">
+<AnchorPane prefHeight="400.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BookController">
    <children>
-      <TextField fx:id="searchBar" layoutX="24.0" layoutY="24.0" prefHeight="35.0" prefWidth="475.0" />
-      <TableView fx:id="resultTable" layoutX="24.0" layoutY="76.0" prefHeight="309.0" prefWidth="266.0">
+      <AnchorPane prefHeight="400.0" prefWidth="183.0" style="-fx-background-color: white; -fx-border-color: #d9d9d9;">
+         <children>
+            <ImageView fitHeight="124.0" fitWidth="166.0" layoutX="30.0" layoutY="25.0" opacity="0.67" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/profile.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="TOP_CENTER" layoutX="34.0" layoutY="159.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back!">
+                     <font>
+                        <Font name="Brush Script MT Italic" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text id="usernameText" fx:id="usernameText" strokeType="OUTSIDE" strokeWidth="0.0" text="P123456" textAlignment="CENTER">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <Button fx:id="logoutButton" layoutX="66.0" layoutY="347.0" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
+         </children>
+      </AnchorPane>
+      <TextField fx:id="searchBar" layoutX="212.0" layoutY="24.0" prefHeight="35.0" prefWidth="475.0" />
+      <TableView fx:id="resultTable" layoutX="212.0" layoutY="76.0" prefHeight="309.0" prefWidth="266.0">
         <columns>
           <TableColumn fx:id="bookResult" prefWidth="125.60001182556152" text="Textbook Code" />
           <TableColumn fx:id="priceResult" prefWidth="139.5999755859375" text="Price" />
         </columns>
       </TableView>
-      <Button layoutX="509.0" layoutY="24.0" mnemonicParsing="false" onAction="#search" prefHeight="35.0" prefWidth="68.0" text="Search" />
-      <Accordion layoutX="307.0" layoutY="76.0" prefHeight="309.0" prefWidth="275.0">
+      <Button layoutX="697.0" layoutY="24.0" mnemonicParsing="false" onAction="#search" prefHeight="35.0" prefWidth="68.0" text="Search" />
+      <Accordion layoutX="495.0" layoutY="76.0" prefHeight="309.0" prefWidth="275.0">
         <panes>
           <TitledPane fx:id="selectedAcc" animated="false" text="Selected Item">
             <content>
@@ -44,7 +71,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-          <TitledPane animated="false" text="Shopping Cart">
+          <TitledPane animated="false" prefHeight="279.0" prefWidth="275.0" text="Shopping Cart">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

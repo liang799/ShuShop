@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -27,6 +28,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class BookController implements Initializable {
+    @FXML
+    private Button logoutButton;
+    
+	@FXML
+    private Text usernameText;
 
 	@FXML
 	private TableView<Book> resultTable;
@@ -61,6 +67,14 @@ public class BookController implements Initializable {
 	FilteredList<Book> flBook;
 	Book selectedBk;
 	ArrayList<CartItem> shopCart = new ArrayList<>();
+	
+    @FXML
+    void onLogout(ActionEvent event) {
+		Stage stage = (Stage) logoutButton.getScene().getWindow();
+		stage.close();
+		AuthManager.getInstance().logout();
+		gotoLocation(event, "Login.fxml");
+    }
 
 	@FXML
 	void search(ActionEvent event) {
@@ -106,6 +120,9 @@ public class BookController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		int position = AuthManager.getInstance().getArrayListPos();
+		String name = AccountVault.getInstance().getCustomers().get(position).getName();
+		usernameText.setText(name);
 		// Search Results Table
 		resultTable.setRowFactory(tv -> {
 			TableRow<Book> row = new TableRow<>();
@@ -164,4 +181,16 @@ public class BookController implements Initializable {
 		login.close();
 	}
 
+	public void gotoLocation(ActionEvent event, String location) {
+		try {
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource(location));
+			Scene scene2 = new Scene(root);
+			Stage Window2 = new Stage();
+			Window2.initModality(Modality.APPLICATION_MODAL);
+			Window2.setScene(scene2);
+			Window2.show();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
