@@ -16,7 +16,7 @@
          </font>
       </Text>
       <Text layoutX="70.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File location" />
-      <TextField fx:id="locationTextView" layoutX="70.0" layoutY="139.0" prefHeight="25.0" prefWidth="373.0" />
+      <TextField fx:id="locationTextView" layoutX="361.0" layoutY="139.0" prefHeight="25.0" prefWidth="82.0" />
       <TableView fx:id="csvTable" layoutX="70.0" layoutY="189.0" prefHeight="270.0" prefWidth="533.0">
         <columns>
           <TableColumn fx:id="csvTextbookCol" prefWidth="335.33324432373047" text="Textbook Code" />
@@ -24,5 +24,6 @@
         </columns>
       </TableView>
       <Button layoutX="456.0" layoutY="139.0" mnemonicParsing="false" onAction="#onUpdateButtonClicked" text="Update" />
+      <TextField fx:id="rootTextView" editable="false" layoutX="71.0" layoutY="139.0" prefHeight="25.0" prefWidth="287.0" />
    </children>
 </AnchorPane>

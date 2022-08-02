@@ -3,26 +3,15 @@ package application;
 import java.util.ArrayList;
 
 public enum CsvFile {
-	INSTANCE("C:/Users/User/eclipse-workspace/ShuShop/b.csv");
+	INSTANCE();
 
-	String path;
-	ArrayList<Book> csvData = new ArrayList<Book>();
+	ArrayList<Book> csvData;
 
 	public static CsvFile getInstance() {
 		return INSTANCE;
 	}
 	
-	CsvFile(String location) {
-		path = location;
-	}
-	
-	public String getPath() {
-		return path;
-	}
-	
-	public void updatePath(String location) {
-		path = location;
-	}
+	CsvFile() { }
 	
 	public ArrayList<Book> getData() {
 		return csvData;
