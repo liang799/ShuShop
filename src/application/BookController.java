@@ -173,7 +173,7 @@ public class BookController implements Initializable {
 	}
 
 	public ObservableList<Book> getBooks() {
-		ArrayList<Book> books = CsvFile.getInstance().getData();
+		ArrayList<Book> books = BookList.getInstance().getData();
 		if (books == null) {
 			books = new ArrayList<Book>();
 		}

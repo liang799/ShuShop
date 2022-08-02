@@ -57,8 +57,8 @@ public class ImportController implements Initializable {
 	}
 
 	public ObservableList<Book> getBooks() {
-		CsvFile.getInstance().setData(readCSV(path));
-		ObservableList<Book> list = FXCollections.observableArrayList(CsvFile.getInstance().getData());
+		BookList.getInstance().setData(readCSV(path));
+		ObservableList<Book> list = FXCollections.observableArrayList(BookList.getInstance().getData());
 		return list;
 	}
 

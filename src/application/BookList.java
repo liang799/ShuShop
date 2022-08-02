@@ -2,16 +2,16 @@ package application;
 
 import java.util.ArrayList;
 
-public enum CsvFile {
+public enum BookList {
 	INSTANCE();
 
 	ArrayList<Book> csvData;
 
-	public static CsvFile getInstance() {
+	public static BookList getInstance() {
 		return INSTANCE;
 	}
 	
-	CsvFile() { }
+	BookList() { }
 	
 	public ArrayList<Book> getData() {
 		return csvData;
