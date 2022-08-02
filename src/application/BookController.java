@@ -28,11 +28,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class BookController implements Initializable {
-    @FXML
-    private Button logoutButton;
-    
 	@FXML
-    private Text usernameText;
+	private Button logoutButton;
+
+	@FXML
+	private Text usernameText;
 
 	@FXML
 	private TableView<Book> resultTable;
@@ -67,14 +67,14 @@ public class BookController implements Initializable {
 	FilteredList<Book> flBook;
 	Book selectedBk;
 	ArrayList<CartItem> shopCart = new ArrayList<>();
-	
-    @FXML
-    void onLogout(ActionEvent event) {
+
+	@FXML
+	void onLogout(ActionEvent event) {
 		Stage stage = (Stage) logoutButton.getScene().getWindow();
 		stage.close();
 		AuthManager.getInstance().logout();
 		gotoLocation(event, "Login.fxml");
-    }
+	}
 
 	@FXML
 	void search(ActionEvent event) {
@@ -151,7 +151,12 @@ public class BookController implements Initializable {
 	}
 
 	public ObservableList<Book> getBooks() {
-		ObservableList<Book> list = FXCollections.observableArrayList(CsvFile.getInstance().getData());
+		ArrayList<Book> books = CsvFile.getInstance().getData();
+		if (books == null) {
+			books = new ArrayList<Book>();
+		}
+		ObservableList<Book> list = FXCollections.observableArrayList(books);;
+
 		return list;
 	}
 
