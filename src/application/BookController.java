@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -56,6 +57,9 @@ public class BookController implements Initializable {
 
 	@FXML
 	private Accordion accordion;
+	
+	@FXML
+    private TitledPane selectedAcc;
 
 	@FXML
 	private TextField searchBar;
@@ -93,7 +97,7 @@ public class BookController implements Initializable {
 	@FXML
 	void addToCart(ActionEvent event) {
 		if (selectedBk == null) {
-			JOptionPane.showMessageDialog(null, "To select a textbook, double click on the row in the left table");
+			JOptionPane.showMessageDialog(null, "To select a textbook, select a row on the table on the left");
 		} else {
 			int quantity = Integer.parseInt(quanText.getText());
 			CartItem cartItem = new CartItem(selectedBk, quantity);
@@ -135,10 +139,11 @@ public class BookController implements Initializable {
 		resultTable.setRowFactory(tv -> {
 			TableRow<Book> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
-				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+				if (event.getClickCount() == 1 && (!row.isEmpty())) {
 					selectedBk = row.getItem();
-					System.out.println("Double click on: " + selectedBk.getModuleCode());
+					System.out.println("Selected: " + selectedBk.getModuleCode());
 					bookName.setText(selectedBk.getModuleCode());
+					accordion.setExpandedPane(selectedAcc);
 				}
 			});
 			return row;
